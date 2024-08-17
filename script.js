@@ -1,40 +1,28 @@
 function convertToRoman(num) {
     const obj = {
-        0: ['M', 1000],
-        1: ['D', 500],
-        2: ['C', 100],
-        3: ['L', 50],
-        4: ['X', 10],
-        5: ['V', 5],
-        6: ['I', 1]
+        M: 1000,
+        CM: 900,
+        D: 500,
+        CD: 400,
+        C: 100,
+        XC: 90,
+        L: 50,
+        XL: 40,
+        X: 10,
+        IX: 9,
+        V: 5,
+        IV: 4,
+        I: 1
     };
 
     let roman = '';
 
-    // Special cases for subtractive notation
-    const subtractiveNotations = {
-        900: 'CM',
-        400: 'CD',
-        90: 'XC',
-        40: 'XL',
-        9: 'IX',
-        4: 'IV'
-    };
-
-    // Check for subtractive notation first
-    for (const key in subtractiveNotations) {
-        while (num >= key) {
-            roman += subtractiveNotations[key];
-            num -= key;
-        }
-    }
-
-    // Convert using the main Roman numeral mapping
-    for (const key in obj) {
-        const [symbol, value] = obj[key];
-        while (num >= value) {
-            roman += symbol;
-            num -= value;
+    // Iterate over the keys in the `obj` object
+    for (let key in obj) {
+        // While num is greater than or equal to the current value
+        while (num >= obj[key]) {
+            roman += key; // Append the Roman numeral symbol to the string
+            num -= obj[key]; // Decrease the num by the value of the Roman numeral
         }
     }
 
